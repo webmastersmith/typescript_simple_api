@@ -1,20 +1,25 @@
-import axios from 'axios'
-// const axios = require('axios')
-
-interface Todo {
-  id: number;
-  title: string;
-  completed: boolean;
+interface Vehicle {
+  name: string
+  year: number
+  broken: boolean
+  summary(): string //if summary fn has arguments, they must be listed.
 }
 
-axios('https://jsonplaceholder.typicode.com/todos/1').then((res) => {
-  console.table(res.data)
-  const todo = res.data as Todo
+const oldCivic = {
+  name: 'civic',
+  year: 2008,
+  broken: true,
+  summary(): string {
+    return `Name: ${this.name}`
+  },
+}
 
-  const id = todo.id;
-  const title = todo.title
-  const completed = todo.completed
+const printVehicle = ({ name, year, broken }: Vehicle): void => {
+  console.log(`
+  Name: ${name}
+  Year: ${year}
+  Broken: ${broken}
+  `)
+}
 
-
-  console.log(`Title: ${title}, with Id: ${id} is ${completed ? 'completed': 'not completed'}`)
-})
+printVehicle(oldCivic)
